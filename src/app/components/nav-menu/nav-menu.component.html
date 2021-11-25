@@ -1,0 +1,22 @@
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <a class="navbar-brand" [routerLink]="['/']">Koi Lottery</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
+                aria-label="Toggle navigation" [attr.aria-expanded]="isExpanded" (click)="toggle()">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end" [ngClass]="{ show: isExpanded }">
+                <button class="btn btn-primary rounded-pill" *ngIf="!walletService.connected$.value" (click)="onConnectWallet()">Connect Wallet</button>
+                <div ngbDropdown class="d-inline-block float_right" placement="bottom-right" display="dynamic" *ngIf="walletService.connected$.value">
+                    <a class="text-dark" role="button" id="dropdownForm" ngbDropdownToggle>
+                      <b>{{ walletService.getAddressShortcut() }}</b>
+                    </a>
+                    <div ngbDropdownMenu aria-labelledby="dropdownForm">
+                      <button class="text-danger" ngbDropdownItem [routerLink]="['/']" (click)="onDisconnectWallet()">Disconnect</button>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </nav>
+</header>
