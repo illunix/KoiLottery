@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { WalletService } from '@app/services/wallet.service';
+import { WalletService } from '@app/services';
 
 @Component({
   selector: 'navbar',

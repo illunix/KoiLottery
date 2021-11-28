@@ -17,6 +17,7 @@ namespace KoiLottery
     public partial class Startup
     {
         private readonly IConfiguration _configuration;
+        private readonly string _etherscanOrigins = "_etherscanOrigins";
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -43,6 +44,20 @@ namespace KoiLottery
                     typeof(IPipelineBehavior<,>),
                     typeof(LoggingBehavior<,>)
                 );
+
+            services.AddHttpClient();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(
+                    name: _etherscanOrigins,
+                    builder =>
+                    {
+                        builder.WithOrigins("https://api.etherscan.io")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -65,6 +80,8 @@ namespace KoiLottery
             }
 
             app.UseRouting();
+
+            app.UseCors(_etherscanOrigins);
 
             app.UseEndpoints(endpoints =>
             {

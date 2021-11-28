@@ -96,11 +96,21 @@ export class WalletService {
     this.connected$.next(false);
   }
 
-  async sendEth(amount: string): Promise<void> {
+  async sendEth(amount: string): Promise<boolean> {
     const toAddress = "0xFCB6EF0EF4a82208f9cC1261b7d89e287dBBD7EA";
     const amountToSend = this.web3?.utils.toWei(amount.toString(), "ether");
-    console.log(this.selectedAccount);
-    this.web3?.eth.sendTransaction({ from: this.selectedAccount, to: toAddress, value: amountToSend });
+    this.web3?.eth.sendTransaction({ from: this.selectedAccount, to: toAddress, value: amountToSend }, function (err, transactionHash) {
+      if (!err) {
+        return false;
+      }
+
+      var receipt = this.web3.
+      if (receipt.status == '0x1' || receipt.status == 1) {
+        return true;
+      }
+    });
+
+    return false;
   }
 
   getAddress(): string {

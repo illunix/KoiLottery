@@ -1,16 +1,18 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { WalletService } from '@app/services/wallet.service';
+import { WalletService } from '@app/services';
 
 interface Lottery {
   id: string,
   name: string,
   duration: number,
   createdAt: Date,
-  participationCost: string,
-  participantsCount: number,
-  pool: number
+  participationCostInETH: string,
+  participationCostInUSD: string,
+  participantsCount: number
+  poolInETH: number,
+  poolInUSD: number
 }
 
 @Component({
@@ -54,6 +56,13 @@ export class LotteriesComponent implements OnInit {
       await this.walletService.connect();
     }
 
-    this.walletService.sendEth(participationCost);
+    if (this.walletService.sendEth(participationCost)) {
+      const lotteryParticipantData = {
+        lotterId: lotteryId,
+        address: this.walletService.getAddress()
+      };
+
+      this.http.post<any>(this.baseUrl + 'api/lottery-participants', lotteryParticipantData).subscribe();
+    }
   }
 }

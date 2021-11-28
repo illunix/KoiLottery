@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 namespace KoiLottery.Features.LotteryParticipants
 {
+    [Route("api/lottery-participants")]
     public partial class LotteryParticipantsController : Controller
     {
         private readonly IMediator _mediator;

@@ -11,12 +11,12 @@
   <tbody>
     <tr *ngFor="let lottery of lotteries; index as i">
       <td [ngStyle]="styleLotteryName(i)"><b>{{ lottery.name }}</b></td>
-      <td>{{ lottery.participationCost }} ETH <b>(2,04 USD)</b></td>
-      <td>{{ lottery.pool }} ETH <b>(12,26 USD)</b></td>
+      <td>{{ lottery.participationCostInETH }} ETH <b>({{ lottery.participationCostInUSD }} USD)</b></td>
+      <td>{{ lottery.poolInETH }} ETH <b>({{ lottery.poolInUSD }} USD)</b></td>
       <td>{{ lottery.participantsCount }}</td>
       <td>20h</td>
       <td valign="bottom" align="right">
-        <button class="btn rounded-pill participateBtn" (click)="onParticipateLottery(lottery.id, lottery.participationCost)">Participate</button>
+        <button class="btn rounded-pill participateBtn" (click)="onParticipateLottery(lottery.id, lottery.participationCostInETH)">Participate</button>
       </td>
     </tr>
   </tbody>
