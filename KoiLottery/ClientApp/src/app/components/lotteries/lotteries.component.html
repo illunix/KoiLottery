@@ -1,0 +1,23 @@
+<table class="table shadow rounded">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Participation cost</th>
+      <th scope="col">Pool</th>
+      <th scope="col">Participants</th>
+      <th scope="col">Time left</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let lottery of lotteries; index as i">
+      <td [ngStyle]="styleLotteryName(i)"><b>{{ lottery.name }}</b></td>
+      <td>{{ lottery.participationCost }} ETH <b>(2,04 USD)</b></td>
+      <td>{{ lottery.pool }} ETH <b>(12,26 USD)</b></td>
+      <td>{{ lottery.participantsCount }}</td>
+      <td>20h</td>
+      <td valign="bottom" align="right">
+        <button class="btn rounded-pill participateBtn" (click)="onParticipateLottery(lottery.id, lottery.participationCost)">Participate</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

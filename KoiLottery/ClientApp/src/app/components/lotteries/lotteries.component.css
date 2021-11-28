@@ -1,0 +1,23 @@
+.participateBtn {
+  background-color: #b217e5;
+  color: white;
+  font-size: 14px;
+}
+
+.firstKoi {
+    color: #f5a835;
+}
+
+.secondKoi {
+
+}
+
+.thirdKoi {
+
+}
+
+.table,
+.table tr,
+.table td {
+  background-color: #ffffff !important;
+}
